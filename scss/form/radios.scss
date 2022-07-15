@@ -33,7 +33,6 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    cursor: $cursor-click-url, pointer;
   }
 
   &:checked + span::before {
