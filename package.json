@@ -2,32 +2,8 @@
   "name": "nes.css",
   "description": "NES.css is NES-style CSS Framework.",
   "scripts": {
-    "watch": "npm run build:sass -- --watch",
-    "// Build task": "",
-    "build": "run-p build:core build:main",
-    "build:core": "npm run build:sass-core && npm run build:autoprefix-core && npm run build:cleancss-core",
-    "build:main": "npm run build:sass && npm run build:autoprefix && npm run build:cleancss",
-    "prebuild": "run-p prebuild:*",
-    "prebuild:stylelint": "npm run stylelint -- --fix",
-    "prebuild:clean": "rimraf css",
-    "postbuild": "npm run build:storybook",
-    "// For nes.css": "",
-    "build:sass": "node-sass --output-style expanded --source-map true --functions scripts/scssFunctions.js scss/nes.scss css/nes.css",
-    "build:autoprefix": "postcss --use autoprefixer --map false --output css/nes.css css/nes.css",
-    "build:cleancss": "cleancss -o css/nes.min.css css/nes.css",
-    "// For nes-core.css": "",
-    "build:sass-core": "node-sass --output-style expanded --source-map true --functions scripts/scssFunctions.js scss/nes-core.scss css/nes-core.css",
-    "build:autoprefix-core": "postcss --use autoprefixer --map false --output css/nes-core.css css/nes-core.css",
-    "build:cleancss-core": "cleancss -o css/nes-core.min.css css/nes-core.css",
-    "// Misc": "",
-    "stylelint": "stylelint scss/**/*.scss",
-    "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook",
-    "deploy": "npm run build",
-    "semantic-release": "semantic-release",
-    "commit": "git-cz",
-    "commit:retry": "git-cz --retry",
-    "commitmsg": "commitlint -e"
+    "dev": "sass --watch --update --style=expanded scss/nes.scss:css/nes.css",
+    "build": "sass --no-source-map --style=compressed scss/nes.scss:css/nes.css"
   },
   "repository": {
     "type": "git",
@@ -45,61 +21,6 @@
     "url": "https://github.com/nostalgic-css/NES.css/issues"
   },
   "homepage": "https://github.com/nostalgic-css/NES.css#readme",
-  "devDependencies": {
-  },
-  "browserslist": [
-    "> 1%"
-  ],
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "subject-case": [
-        0,
-        "never",
-        "sentence-case"
-      ],
-      "subject-full-stop": [
-        0,
-        "never",
-        "."
-      ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "scss/**/*.scss": [
-      "npm run prebuild:stylelint",
-      "npm run postbuild",
-      "git add"
-    ],
-    "*.js": [
-      "eslint '.storybook/**/*.js' 'story/**/*.js'"
-    ]
-  },
-  "prettier": {
-    "printWidth": 100
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      [
-        "@semantic-release/exec",
-        {
-          "prepareCmd": "./scripts/updatePackageHeader.js ${nextRelease.version}"
-        }
-      ]
-    ]
-  },
   "stylelint": {
     "plugins": [
       "stylelint-scss",
@@ -120,26 +41,7 @@
       "docs/*"
     ]
   },
-  "eslintConfig": {
-    "extends": "airbnb-base",
-    "rules": {
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": [
-            "**/*.stories.js",
-            "**/*.template.js"
-          ]
-        }
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "docs/*"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+  "devDependencies": {
+    "sass": "^1.53.0"
   }
 }
