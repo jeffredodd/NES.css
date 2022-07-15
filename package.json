@@ -41,7 +41,7 @@
       "docs/*"
     ]
   },
-  "devDependencies": {
+  "dependencies": {
     "sass": "^1.53.0"
   }
 }
