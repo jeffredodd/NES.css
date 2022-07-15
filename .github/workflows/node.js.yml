@@ -35,7 +35,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         files: |
-          'css/nes.css'
+          css/nes.css
         commit-message: Build of NES.css
         ref: refs/heads/develop
     
